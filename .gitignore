@@ -1,0 +1,15 @@
+# DVC
+/.dvc/cache
+/.dvc/tmp
+/.dvc/config.local
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# MLflow
+mlruns/
+/data
