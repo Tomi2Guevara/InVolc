@@ -229,3 +229,17 @@ def plot_segmentation_results(dataloader, predictions):
         axs[2].axis('off')
 
         plt.show()
+def estimate_pos_weight(dataset, max_weight=50.0):
+    pos = 0.0
+    total = 0.0
+
+    for i in range(len(dataset)):
+        mask = dataset[i]["mask"]
+        pos += mask.sum().item()
+        total += mask.numel()
+
+    neg = total - pos
+    weight = neg / max(pos, 1.0)
+    weight = min(weight, max_weight)
+
+    return torch.tensor([weight], dtype=torch.float32)
